@@ -1,0 +1,30 @@
+<body style="background: rgb(0, 34, 128); color:whitesmoke;"></body>
+<script>
+    const flakes = [];
+    function add() {
+        const flake = document.createElement("div");
+        flake.setAttribute("style", `
+            position:absolute;
+            left: ${Math.random() * 100}vw;
+            top: ${0}vh;
+        `);
+        flake.innerHTML = "*"; //SPLAT
+        document.body.appendChild(flake);
+        flakes.push(flake);
+    }
+    function addMany(limit) {
+        for (let i = 0; i < limit; i++) {
+            add();
+        }
+    }
+    function iterate() {
+        addMany(10);
+        flakes.forEach(bug => {
+            let y = parseInt(bug.style.top.split("vh")[0]);
+            if (y < 99) { y++; };
+            bug.style.top = y + "vh";
+        }); //enmd forEach
+        setTimeout(iterate, 100);
+    }
+    iterate();
+</script>

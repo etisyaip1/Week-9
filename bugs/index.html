@@ -1,0 +1,31 @@
+<body style="background:rgb(100, 0, 70); color:orange"></body>
+<script>//RANDOM WALK (Brownian Motion) - Gaussian or Stochastic means random;
+    const bugs = [];
+    function add() {
+        const bug = document.createElement("div");
+        bug.setAttribute("style", `
+            position:absolute;
+            left: ${Math.random() * 100}vw;
+            top: ${Math.random() * 100}vh;
+        `);
+        bug.innerHTML = "*"; //SPLAT
+        document.body.appendChild(bug);
+        bugs.push(bug);
+    }
+    function addMany(limit) {
+        for (let i = 0; i < limit; i++) {
+            add();
+        }
+    }
+    addMany(100)
+    function iterate() {
+        bugs.forEach(bug => {
+            let x = parseInt(bug.style.left.split("vw")[0]) + (Math.round(Math.random() * 2) - 1);
+            let y = parseInt(bug.style.top.split("vh")[0]) + (Math.round(Math.random() * 2) - 1);
+            bug.style.left = x + "vw";
+            bug.style.top = y + "vh";
+        }); //enmd forEach
+        setTimeout(iterate, 100);
+    }
+    iterate();
+</script>
